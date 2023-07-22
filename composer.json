@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "mokhosh/filament-jalali",
+    "description": "Add Jalali datetime to your filament tables",
     "keywords": [
-        ":vendor_name",
+        "mokhosh",
         "laravel",
-        ":package_slug"
+        "filament-jalali"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/mokhosh/filament-jalali",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Mo Khosh",
+            "email": "mskhoshnazar@gmail.com",
             "role": "Developer"
         }
     ],
@@ -23,25 +23,20 @@
     "require-dev": {
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^7.9",
-        "nunomaduro/larastan": "^2.0.1",
         "orchestra/testbench": "^8.0",
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-arch": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0",
-        "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan-deprecation-rules": "^1.0",
-        "phpstan/phpstan-phpunit": "^1.0",
-        "spatie/laravel-ray": "^1.26"
+        "pestphp/pest-plugin-laravel": "^2.0"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Mokhosh\\FilamentJalali\\": "src/",
+            "Mokhosh\\FilamentJalali\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/"
+            "Mokhosh\\FilamentJalali\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -61,10 +56,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Mokhosh\\FilamentJalali\\FilamentJalaliServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "FilamentJalali": "Mokhosh\\FilamentJalali\\Facades\\FilamentJalali"
             }
         }
     },

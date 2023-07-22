@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Mokhosh\FilamentJalali\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class FilamentJalaliCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'filament-jalali';
 
     public $description = 'My command';
 
