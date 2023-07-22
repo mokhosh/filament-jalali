@@ -37,9 +37,9 @@ Just add `jalaliDate` and `jalaliDateTime` to the filament `TextColumn`s instead
 
 ```php
 Tables\Columns\TextColumn::make('created_at')
-    ->jalaliDate();
+    ->jalaliDate(),
 Tables\Columns\TextColumn::make('updated_at')
-    ->jalaliDateTime();
+    ->jalaliDateTime(),
 ```
 
 ## Credits
