@@ -2,9 +2,9 @@
 
 namespace Mokhosh\FilamentJalali;
 
+use Mokhosh\FilamentJalali\Commands\FilamentJalaliCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Mokhosh\FilamentJalali\Commands\FilamentJalaliCommand;
 
 class FilamentJalaliServiceProvider extends PackageServiceProvider
 {

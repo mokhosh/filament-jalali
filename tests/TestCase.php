@@ -3,8 +3,8 @@
 namespace Mokhosh\FilamentJalali\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use Mokhosh\FilamentJalali\FilamentJalaliServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
