@@ -2,11 +2,11 @@
 
 namespace Mokhosh\FilamentJalali;
 
+use Filament\Forms\Forms\Components\DateTimePicker;
+use Filament\Support\Assets\AlpineComponent;
+use Filament\Support\Facades\FilamentAsset;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Forms\Components\DateTimePicker;
-use Filament\Support\Facades\FilamentAsset;
-use Filament\Support\Assets\AlpineComponent;
 use Illuminate\Support\Carbon;
 use Morilog\Jalali\Jalalian;
 use Spatie\LaravelPackageTools\Package;
@@ -34,7 +34,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            AlpineComponent::make('jalali-date-time-picker', __DIR__ . '/../resources/js/components/jalali-date-time-picker.js'),
+            AlpineComponent::make('jalali-date-time-picker', __DIR__.'/../resources/js/components/jalali-date-time-picker.js'),
         ];
     }
 
