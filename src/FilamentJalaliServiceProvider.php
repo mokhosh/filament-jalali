@@ -2,7 +2,7 @@
 
 namespace Mokhosh\FilamentJalali;
 
-use Filament\Forms\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Tables\Columns\Column;
