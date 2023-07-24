@@ -2,6 +2,10 @@
 
 All notable changes to `filament-jalali` will be documented in this file.
 
+## v1.2 - 2023-07-24
+
+fix imports
+
 ## v1.1 - 2023-07-24
 
 See if the jalali date time picker works as expected
