@@ -1,7 +1,6 @@
-# Add Jalali datetime to your filament tables
+# Add "Jalali calendar" columns and pickers to Filament
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mokhosh/filament-jalali.svg?style=flat-square)](https://packagist.org/packages/mokhosh/filament-jalali)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/mokhosh/filament-jalali/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/mokhosh/filament-jalali/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/mokhosh/filament-jalali/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/mokhosh/filament-jalali/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/mokhosh/filament-jalali.svg?style=flat-square)](https://packagist.org/packages/mokhosh/filament-jalali)
 
