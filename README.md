@@ -21,6 +21,9 @@ composer require mokhosh/filament-jalali
 To add Jalali date and date-time columns to your tables, just add `jalaliDate` and `jalaliDateTime` to the filament `TextColumn`s instead of `date` or `dateTime`.
 
 ```php
+// Yes! Just use Filament's original TextColumns!
+use Filament\Tables;
+
 Tables\Columns\TextColumn::make('created_at')
     ->jalaliDate(),
 Tables\Columns\TextColumn::make('updated_at')
@@ -30,7 +33,12 @@ Tables\Columns\TextColumn::make('updated_at')
 To add Jalali date and date-time pickers to your forms, just add `jalali`to your `DatePicker` and `DateTimePicker`.
 
 ```php
-Forms\Components\DatePicker::make('published_at')
+// Yes! Just use Filament's original DatePickers and DateTimePickers!
+use Filament\Forms;
+
+Forms\Components\DatePicker::make('moderated_at')
+    ->jalali(),
+Forms\Components\DateTimePicker::make('published_at')
     ->jalali(),
 ```
 
