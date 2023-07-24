@@ -4,6 +4,9 @@ namespace Mokhosh\FilamentJalali;
 
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Forms\Components\DateTimePicker;
+use Filament\Support\Facades\FilamentAsset;
+use Filament\Support\Assets\AlpineComponent;
 use Illuminate\Support\Carbon;
 use Morilog\Jalali\Jalalian;
 use Spatie\LaravelPackageTools\Package;
@@ -11,15 +14,37 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class FilamentJalaliServiceProvider extends PackageServiceProvider
 {
+    public static string $name = 'filament-jalali';
+
+    public static string $viewNamespace = 'filament-jalali';
+
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('filament-jalali')
-            ->hasConfigFile();
+            ->name(static::$name)
+            ->hasConfigFile()
+            ->hasViews(static::$viewNamespace);
+    }
+
+    protected function getAssetPackageName(): ?string
+    {
+        return 'mokhosh/filament-jalali';
+    }
+
+    protected function getAssets(): array
+    {
+        return [
+            AlpineComponent::make('jalali-date-time-picker', __DIR__ . '/../resources/js/components/jalali-date-time-picker.js'),
+        ];
     }
 
     public function packageBooted(): void
     {
+        FilamentAsset::register(
+            $this->getAssets(),
+            $this->getAssetPackageName()
+        );
+
         TextColumn::macro('jalaliDate', function (string $format = null, string $timezone = null) {
             $format ??= config('filament-jalali.date_format');
 
@@ -40,6 +65,14 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             $format ??= config('filament-jalali.datetime_format');
 
             $this->date($format, $timezone);
+
+            return $this;
+        });
+
+        DateTimePicker::macro('jalali', function () {
+            $this
+                ->firstDayOfWeek(6)
+                ->view('filament-jalali::jalali-date-time-picker');
 
             return $this;
         });
