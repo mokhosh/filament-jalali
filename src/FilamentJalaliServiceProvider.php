@@ -71,6 +71,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
 
         DateTimePicker::macro('jalali', function () {
             $this
+                ->native(false)
                 ->firstDayOfWeek(6)
                 ->view('filament-jalali::jalali-date-time-picker');
 
