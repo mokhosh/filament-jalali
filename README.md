@@ -16,21 +16,6 @@ You can install the package via composer:
 composer require mokhosh/filament-jalali
 ```
 
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="filament-jalali-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-    'date_format'=>'Y/m/d',
-    'datetime_format'=>'Y/m/d H:i:s',
-];
-```
-
 ## Usage
 
 To add Jalali date and date-time columns to your tables, just add `jalaliDate` and `jalaliDateTime` to the filament `TextColumn`s instead of `date` or `dateTime`.
@@ -47,6 +32,22 @@ To add Jalali date and date-time pickers to your forms, just add `jalali`to your
 ```php
 Forms\Components\DatePicker::make('published_at')
     ->jalali(),
+```
+
+## Config
+You can optionally publish the config file with:
+
+```bash
+php artisan vendor:publish --tag="filament-jalali-config"
+```
+
+This is the contents of the published config file:
+
+```php
+return [
+    'date_format'=>'Y/m/d',
+    'datetime_format'=>'Y/m/d H:i:s',
+];
 ```
 
 ## Credits
