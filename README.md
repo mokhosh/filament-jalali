@@ -5,8 +5,9 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/mokhosh/filament-jalali/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/mokhosh/filament-jalali/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/mokhosh/filament-jalali.svg?style=flat-square)](https://packagist.org/packages/mokhosh/filament-jalali)
 
-No fuss package to add Jalali Date and DateTime columns to your table.
+No fuss package to add Jalali Date and DateTime columns to your table, and a beautiful Jalali Date and DateTime picker to your forms.
 No new column type, just keep using your good old `TextColumn`s!
+No new form components, just keep using your beautiful `DatePicker`s and `DateTimePicker`s!
 
 ## Installation
 
@@ -33,13 +34,20 @@ return [
 
 ## Usage
 
-Just add `jalaliDate` and `jalaliDateTime` to the filament `TextColumn`s instead of `date` or `dateTime`.
+To add Jalali date and date-time columns to your tables, just add `jalaliDate` and `jalaliDateTime` to the filament `TextColumn`s instead of `date` or `dateTime`.
 
 ```php
 Tables\Columns\TextColumn::make('created_at')
     ->jalaliDate(),
 Tables\Columns\TextColumn::make('updated_at')
     ->jalaliDateTime(),
+```
+
+To add Jalali date and date-time pickers to your forms, just add `jalali`to your `DatePicker` and `DateTimePicker`.
+
+```php
+Forms\Components\DatePicker::make('published_at')
+    ->jalali(),
 ```
 
 ## Credits
