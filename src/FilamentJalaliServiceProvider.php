@@ -64,7 +64,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         TextColumn::macro('jalaliDateTime', function (string $format = null, string $timezone = null) {
             $format ??= config('filament-jalali.datetime_format');
 
-            $this->date($format, $timezone);
+            $this->jalaliDate($format, $timezone);
 
             return $this;
         });
