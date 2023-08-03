@@ -2,6 +2,10 @@
 
 All notable changes to `filament-jalali` will be documented in this file.
 
+## Sync with Filament v3 stable changes - 2023-08-03
+
+This release syncs the view resource with how Filament changed "affixes" to "wrapper"
+
 ## Add jalali datetime picker - 2023-07-24
 
 Adds a `jalali` method to `DatePicker` and `DateTimePicker` components.
