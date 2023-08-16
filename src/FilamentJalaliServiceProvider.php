@@ -3,6 +3,7 @@
 namespace Mokhosh\FilamentJalali;
 
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Tables\Columns\Column;
@@ -62,6 +63,30 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         });
 
         TextColumn::macro('jalaliDateTime', function (string $format = null, string $timezone = null) {
+            $format ??= config('filament-jalali.datetime_format');
+
+            $this->jalaliDate($format, $timezone);
+
+            return $this;
+        });
+
+        TextEntry::macro('jalaliDate', function (string $format = null, string $timezone = null) {
+            $format ??= config('filament-jalali.date_format');
+
+            $this->formatStateUsing(static function (Column $column, $state) use ($format, $timezone): ?string {
+                if (blank($state)) {
+                    return null;
+                }
+
+                return Jalalian::fromCarbon(Carbon::parse($state)
+                    ->setTimezone($timezone ?? $column->getTimezone()))
+                    ->format($format);
+            });
+
+            return $this;
+        });
+
+        TextEntry::macro('jalaliDateTime', function (string $format = null, string $timezone = null) {
             $format ??= config('filament-jalali.datetime_format');
 
             $this->jalaliDate($format, $timezone);
