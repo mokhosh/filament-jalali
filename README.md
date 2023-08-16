@@ -30,6 +30,17 @@ Tables\Columns\TextColumn::make('updated_at')
     ->jalaliDateTime(),
 ```
 
+To add Jalali date and date-time columns to your infolists, just add `jalaliDate` and `jalaliDateTime` to the filament `TextEntry`s instead of `date` or `dateTime`.
+
+```php
+use Filament\Infolists\Components;
+
+Components\TextEntry::make('created_at')
+    ->jalaliDate(),
+Components\TextEntry::make('updated_at')
+    ->jalaliDateTime(),
+```
+
 To add Jalali date and date-time pickers to your forms, just add `jalali`to your `DatePicker` and `DateTimePicker`.
 
 ```php
