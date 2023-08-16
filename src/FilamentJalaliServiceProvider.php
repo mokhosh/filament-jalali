@@ -73,13 +73,13 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         TextEntry::macro('jalaliDate', function (string $format = null, string $timezone = null) {
             $format ??= config('filament-jalali.date_format');
 
-            $this->formatStateUsing(static function (Column $column, $state) use ($format, $timezone): ?string {
+            $this->formatStateUsing(static function ($state) use ($format, $timezone): ?string {
                 if (blank($state)) {
                     return null;
                 }
 
                 return Jalalian::fromCarbon(Carbon::parse($state)
-                    ->setTimezone($timezone ?? $column->getTimezone()))
+                    ->setTimezone($timezone))
                     ->format($format);
             });
 
