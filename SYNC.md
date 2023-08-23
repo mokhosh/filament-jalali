@@ -1,6 +1,7 @@
 # How to sync this
 Since I have made as little change as possible to the original Filament component, this should look and feel just like the original.
 If there's ever a change in the original component, these are the changes I've made, for my own future reference.
+Latest sync: Aug 23
 
 ## In the component js file
 
