@@ -2,6 +2,10 @@
 
 All notable changes to `filament-jalali` will be documented in this file.
 
+## Sync with Filament latest changes and fixes - 2023-08-23
+
+Sync with Filament latest changes and fixes
+
 ## Sync with Filament v3 stable changes - 2023-08-03
 
 This release syncs the view resource with how Filament changed "affixes" to "wrapper"
