@@ -46,7 +46,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             $this->getAssetPackageName()
         );
 
-        TextColumn::macro('jalaliDate', function (string $format = null, string $timezone = null) {
+        TextColumn::macro('jalaliDate', function (?string $format = null, ?string $timezone = null) {
             $format ??= config('filament-jalali.date_format');
 
             $this->formatStateUsing(static function (Column $column, $state) use ($format, $timezone): ?string {
@@ -62,7 +62,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             return $this;
         });
 
-        TextColumn::macro('jalaliDateTime', function (string $format = null, string $timezone = null) {
+        TextColumn::macro('jalaliDateTime', function (?string $format = null, ?string $timezone = null) {
             $format ??= config('filament-jalali.datetime_format');
 
             $this->jalaliDate($format, $timezone);
@@ -70,7 +70,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             return $this;
         });
 
-        TextEntry::macro('jalaliDate', function (string $format = null, string $timezone = null) {
+        TextEntry::macro('jalaliDate', function (?string $format = null, ?string $timezone = null) {
             $format ??= config('filament-jalali.date_format');
 
             $this->formatStateUsing(static function ($state) use ($format, $timezone): ?string {
@@ -86,7 +86,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             return $this;
         });
 
-        TextEntry::macro('jalaliDateTime', function (string $format = null, string $timezone = null) {
+        TextEntry::macro('jalaliDateTime', function (?string $format = null, ?string $timezone = null) {
             $format ??= config('filament-jalali.datetime_format');
 
             $this->jalaliDate($format, $timezone);
