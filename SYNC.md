@@ -5,6 +5,8 @@ Latest sync: Aug 23
 
 ## In the component js file
 
+Customize the [original](https://github.com/filamentphp/filament/blob/3.x/packages/forms/resources/js/components/date-time-picker.js)
+
 ```diff
 +import jalaliday from 'jalaliday'
 
@@ -12,7 +14,7 @@ Latest sync: Aug 23
  dayjs.extend(localeData)
  dayjs.extend(timezone)
  dayjs.extend(utc)
- 
+
 +dayjs.extend(jalaliday)
 +dayjs.calendar('jalali')
 ```
@@ -81,6 +83,8 @@ Latest sync: Aug 23
 ```
 
 ## In the component blade file
+
+Customize the [original](https://github.com/filamentphp/filament/blob/3.x/packages/forms/resources/views/components/date-time-picker.blade.php)
 
 ```diff
 -        @if ($isNative())
