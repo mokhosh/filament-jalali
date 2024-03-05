@@ -2,6 +2,10 @@
 
 All notable changes to `filament-jalali` will be documented in this file.
 
+## v3.2.6 - 2024-03-05
+
+fix imports
+
 ## v3.2.5 - 2024-03-05
 
 use ariaieboy's jalali to allow laravel 11
