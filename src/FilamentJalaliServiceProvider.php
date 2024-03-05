@@ -9,7 +9,7 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Carbon;
-use Morilog\Jalali\Jalalian;
+use Ariaieboy\Jalali\Jalali;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -54,7 +54,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
                     return null;
                 }
 
-                return Jalalian::fromCarbon(Carbon::parse($state)
+                return Jalali::fromCarbon(Carbon::parse($state)
                     ->setTimezone($timezone ?? $column->getTimezone()))
                     ->format($format);
             });
@@ -78,7 +78,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
                     return null;
                 }
 
-                return Jalalian::fromCarbon(Carbon::parse($state)
+                return Jalali::fromCarbon(Carbon::parse($state)
                     ->setTimezone($timezone))
                     ->format($format);
             });
