@@ -2,6 +2,7 @@
 
 namespace Mokhosh\FilamentJalali;
 
+use Ariaieboy\Jalali\Jalali;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Support\Assets\AlpineComponent;
@@ -9,7 +10,6 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Carbon;
-use Ariaieboy\Jalali\Jalali;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
