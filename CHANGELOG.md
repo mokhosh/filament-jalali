@@ -2,6 +2,10 @@
 
 All notable changes to `filament-jalali` will be documented in this file.
 
+## v3.2.4 - 2024-03-05
+
+Add Laravel 11 support
+
 ## Sync with Filament latest changes and fixes - 2023-08-23
 
 Sync with Filament latest changes and fixes
