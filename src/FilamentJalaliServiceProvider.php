@@ -4,6 +4,7 @@ namespace Mokhosh\FilamentJalali;
 
 use Ariaieboy\Jalali\Jalali;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Infolists\Components\Entry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Facades\FilamentAsset;
@@ -73,13 +74,13 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         TextEntry::macro('jalaliDate', function (?string $format = null, ?string $timezone = null) {
             $format ??= config('filament-jalali.date_format');
 
-            $this->formatStateUsing(static function ($state) use ($format, $timezone): ?string {
+            $this->formatStateUsing(static function (Entry $entry, $state) use ($format, $timezone): ?string {
                 if (blank($state)) {
                     return null;
                 }
 
                 return Jalali::fromCarbon(Carbon::parse($state)
-                    ->setTimezone($timezone))
+                    ->setTimezone($timezone ?? $entry->getTimezone()))
                     ->format($format);
             });
 
