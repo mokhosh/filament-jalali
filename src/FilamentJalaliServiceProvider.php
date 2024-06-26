@@ -54,9 +54,14 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
                     return null;
                 }
 
-                return Jalali::fromCarbon(Carbon::parse($state)
-                    ->setTimezone($timezone ?? $column->getTimezone()))
-                    ->format($format);
+                //changed by Fatehi:                
+                if (!(config('filament-jalali.ignore_convert'))){
+                    $state=Jalali::fromCarbon(Carbon::parse($state)
+                        ->setTimezone($timezone ?? $column->getTimezone()))
+                        ->format($format);
+                }
+
+                return $state;
             });
 
             return $this;
@@ -79,9 +84,17 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
                     return null;
                 }
 
-                return Jalali::fromCarbon(Carbon::parse($state)
-                    ->setTimezone($timezone))
-                    ->format($format);
+
+                //changed by Fatehi:                
+                if (!(config('filament-jalali.ignore_convert'))){
+                    $state=Jalali::fromCarbon(Carbon::parse($state)
+                        ->setTimezone($timezone))
+                        ->format($format);
+                }
+                return $state;
+                // return Jalali::fromCarbon(Carbon::parse($state)
+                //     ->setTimezone($timezone))
+                //     ->format($format);
             });
 
             return $this;
@@ -96,10 +109,13 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         });
 
         DateTimePicker::macro('jalali', function () {
-            $this
-                ->native(false)
-                ->firstDayOfWeek(6)
-                ->view('filament-jalali::jalali-date-time-picker');
+            //changed by Fatehi:
+            if (!(config('filament-jalali.ignore_convert'))){            
+                $this
+                    ->native(false)
+                    ->firstDayOfWeek(6)
+                    ->view('filament-jalali::jalali-date-time-picker');
+            }
 
             return $this;
         });
