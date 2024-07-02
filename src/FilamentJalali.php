@@ -2,6 +2,4 @@
 
 namespace Mokhosh\FilamentJalali;
 
-class FilamentJalali
-{
-}
+class FilamentJalali {}
