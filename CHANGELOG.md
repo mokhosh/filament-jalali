@@ -2,6 +2,12 @@
 
 All notable changes to `filament-jalali` will be documented in this file.
 
+## v3.3.0 - 2024-07-02
+
+This version adds the `ignore` attribute.
+
+**Full Changelog**: https://github.com/mokhosh/filament-jalali/compare/v2.3.8...v3.3.0
+
 ## v3.2.6 - 2024-03-05
 
 fix imports
