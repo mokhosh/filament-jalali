@@ -53,6 +53,25 @@ Forms\Components\DateTimePicker::make('published_at')
     ->jalali(),
 ```
 
+## Ignoring Jalali Conversion
+If you want to ignore jalali conversion you can use the `ignore` parameter:
+
+```php
+use Filament\Tables;
+use Filament\Infolists\Components;
+use Filament\Forms;
+use Illuminate\Support\Facades\App;
+
+Tables\Columns\TextColumn::make('created_at')
+    ->jalaliDate(ignore: App::isLocale('en')),
+
+Components\TextEntry::make('updated_at')
+    ->jalaliDateTime(ignore: App::isLocale('fr')),
+
+Forms\Components\DatePicker::make('moderated_at')
+    ->jalali(ignore: App::isLocale('es')),
+```
+
 ## Config
 You can optionally publish the config file with:
 
