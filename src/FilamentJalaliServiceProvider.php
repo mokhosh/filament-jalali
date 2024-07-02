@@ -2,7 +2,6 @@
 
 namespace Mokhosh\FilamentJalali;
 
-use Ariaieboy\Jalali\Jalali;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Support\Assets\AlpineComponent;
@@ -10,6 +9,7 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Carbon;
+use Morilog\Jalali\Jalalian;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -58,7 +58,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
                     return null;
                 }
 
-                return Jalali::fromCarbon(Carbon::parse($state)
+                return Jalalian::fromCarbon(Carbon::parse($state)
                     ->setTimezone($timezone ?? $column->getTimezone()))
                     ->format($format);
             });
@@ -91,7 +91,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
                     return null;
                 }
 
-                return Jalali::fromCarbon(Carbon::parse($state)
+                return Jalalian::fromCarbon(Carbon::parse($state)
                     ->setTimezone($timezone))
                     ->format($format);
             });

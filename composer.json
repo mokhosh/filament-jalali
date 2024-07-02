@@ -19,7 +19,7 @@
         "php": "^8.1",
         "filament/filament": "^3.0",
         "illuminate/contracts": "^10.0|^11.0",
-        "ariaieboy/jalali": "^1.0",
+        "morilog/jalali": "^v3.4.2",
         "spatie/laravel-package-tools": "^1.14.0"
     },
     "require-dev": {
