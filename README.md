@@ -4,6 +4,8 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/mokhosh/filament-jalali/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/mokhosh/filament-jalali/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/mokhosh/filament-jalali.svg?style=flat-square)](https://packagist.org/packages/mokhosh/filament-jalali)
 
+|![Jalali datetime picker form component and table text column](https://raw.githubusercontent.com/mokhosh/filament-jalali/main/art/readme.jpg)
+
 No fuss package to add Jalali Date and DateTime columns to your table, and a beautiful Jalali Date and DateTime picker to your forms.
 No new column type, just keep using your good old `TextColumn`s!
 No new form components, just keep using your beautiful `DatePicker`s and `DateTimePicker`s!
