@@ -2,6 +2,10 @@
 
 All notable changes to `filament-jalali` will be documented in this file.
 
+## v3.4.1 - 2024-08-16
+
+- sync resources with filament original resources
+
 ## v3.4.0 - 2024-08-16
 
 - add IDE helper for autocompletion
