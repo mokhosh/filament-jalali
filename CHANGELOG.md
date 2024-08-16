@@ -2,6 +2,10 @@
 
 All notable changes to `filament-jalali` will be documented in this file.
 
+## v3.4.0 - 2024-08-16
+
+- add IDE helper for autocompletion
+
 ## v3.3.0 - 2024-07-02
 
 This version adds the `ignore` attribute.
