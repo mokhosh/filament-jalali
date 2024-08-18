@@ -46,8 +46,8 @@
                 @else
                     ax-load
                 @endif
-                ax-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('jalali-date-time-picker', 'mokhosh/filament-jalali') }}"
-                x-data="dateTimePickerFormComponent({
+                ax-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('filament-jalali', 'mokhosh/filament-jalali') }}"
+                x-data="filamentJalaliFormComponent({
                             displayFormat:
                                 '{{ convert_date_format($getDisplayFormat())->to('day.js') }}',
                             firstDayOfWeek: {{ $getFirstDayOfWeek() }},

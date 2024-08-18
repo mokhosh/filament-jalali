@@ -35,7 +35,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            AlpineComponent::make('jalali-date-time-picker', __DIR__.'/../resources/js/components/jalali-date-time-picker.js'),
+            AlpineComponent::make('filament-jalali', __DIR__ . '/../resources/js/dist/components/filament-jalali.js'),
         ];
     }
 
