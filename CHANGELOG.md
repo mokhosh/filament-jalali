@@ -2,6 +2,14 @@
 
 All notable changes to `filament-jalali` will be documented in this file.
 
+## v3.5.0 - 2024-08-18
+
+### What's Changed
+
+* Allow multiple calendar systems by @mokhosh in https://github.com/mokhosh/filament-jalali/pull/11
+
+**Full Changelog**: https://github.com/mokhosh/filament-jalali/compare/v3.4.1...v3.5.0
+
 ## v3.4.1 - 2024-08-16
 
 - sync resources with filament original resources
