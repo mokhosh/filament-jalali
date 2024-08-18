@@ -32,7 +32,7 @@ Customize the [original](https://github.com/filamentphp/filament/blob/3.x/packag
 -            this.months = dayjs.months()
 +            this.months = dayjs.locale() === 'en' ?
 +                dayjs.en.jmonths :
-+                dayjs.months()
++                'فروردین_اردیبهشت_خرداد_تیر_مرداد_شهریور_مهر_آبان_آذر_دی_بهمن_اسفند'.split('_')
          },
 ```
 
