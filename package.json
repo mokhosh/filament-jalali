@@ -1,0 +1,14 @@
+{
+    "name": "filament-jalali",
+    "version": "3.5.0",
+    "description": "Add Jalali datetime to your filament tables",
+    "type": "module",
+    "scripts": {
+        "build": "node bin/build.js"
+    },
+    "dependencies": {
+        "dayjs": "^1.11.12",
+        "esbuild": "^0.23.1",
+        "jalaliday": "^2.3.0"
+    }
+}
