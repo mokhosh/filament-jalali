@@ -56,7 +56,7 @@ Forms\Components\DateTimePicker::make('published_at')
 ```
 
 ## Ignoring Jalali Conversion
-If you want to ignore jalali conversion you can use the `ignore` parameter:
+If you want to ignore jalali conversion you can use the `when` and `unless` methods:
 
 ```php
 use Filament\Tables;
@@ -65,13 +65,15 @@ use Filament\Forms;
 use Illuminate\Support\Facades\App;
 
 Tables\Columns\TextColumn::make('created_at')
-    ->jalaliDate(ignore: App::isLocale('en')),
+    ->date()
+    ->when(App::isLocale('fa'), fn (TextColumn $column) => $column->jalaliDate()),
 
 Components\TextEntry::make('updated_at')
-    ->jalaliDateTime(ignore: App::isLocale('fr')),
+    ->dateTime()
+    ->unless(App::isLocale('en'), fn (TextColumn $column) => $column->jalaliDateTime()),
 
-Forms\Components\DatePicker::make('moderated_at')
-    ->jalali(ignore: App::isLocale('es')),
+Forms\Components\DatePicker::make('birthday')
+    ->when(App::isLocale('fa'), fn (TextColumn $column) => $column->jalali()),
 ```
 
 ## Config
