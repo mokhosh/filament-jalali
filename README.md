@@ -89,6 +89,14 @@ public function boot(): void
 }
 ```
 
+Some common formats you might want to use:
+
+`j F Y` <span dir="rtl">۱۵ مهر ۱۳۶۸</span>
+
+`Y/m/d` <span dir="rtl">۱۳۶۸/۰۷/۱۵</span>
+
+`l j F` <span dir="rtl">شنبه ۱۵ مهر</span>
+
 ## Credits
 
 - [Mo Khosh](https://github.com/mokhosh)
