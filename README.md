@@ -76,20 +76,17 @@ Forms\Components\DatePicker::make('birthday')
     ->when(App::isLocale('fa'), fn (TextColumn $column) => $column->jalali()),
 ```
 
-## Config
-You can optionally publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="filament-jalali-config"
-```
-
-This is the contents of the published config file:
+## Configuring the Format Globally
+You can set the default date formats for tables and infolists anywhere you want, likely in a service provider:
 
 ```php
-return [
-    'date_format'=>'Y/m/d',
-    'datetime_format'=>'Y/m/d H:i:s',
-];
+public function boot(): void
+{
+    Table::$defaultDateDisplayFormat = 'Y/m/d';
+    Table::$defaultDateTimeDisplayFormat = 'Y/m/d H:i:s';
+    Infolist::$defaultDateDisplayFormat = 'Y/m/d';
+    Infolist::$defaultDateTimeDisplayFormat = 'Y/m/d H:i:s';
+}
 ```
 
 ## Credits

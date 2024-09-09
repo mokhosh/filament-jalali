@@ -4,10 +4,12 @@ namespace Mokhosh\FilamentJalali;
 
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 use Illuminate\Support\Carbon;
 use Morilog\Jalali\Jalalian;
 use Spatie\LaravelPackageTools\Package;
@@ -23,7 +25,6 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
     {
         $package
             ->name(static::$name)
-            ->hasConfigFile()
             ->hasViews(static::$viewNamespace);
     }
 
@@ -47,7 +48,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         );
 
         TextColumn::macro('jalaliDate', function (?string $format = null, ?string $timezone = null) {
-            $format ??= config('filament-jalali.date_format');
+            $format ??= Table::$defaultDateDisplayFormat;
 
             $this->formatStateUsing(static function (Column $column, $state) use ($format, $timezone): ?string {
                 if (blank($state)) {
@@ -63,7 +64,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         });
 
         TextColumn::macro('jalaliDateTime', function (?string $format = null, ?string $timezone = null) {
-            $format ??= config('filament-jalali.datetime_format');
+            $format ??= Table::$defaultDateTimeDisplayFormat;
 
             $this->jalaliDate($format, $timezone);
 
@@ -71,7 +72,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         });
 
         TextEntry::macro('jalaliDate', function (?string $format = null, ?string $timezone = null) {
-            $format ??= config('filament-jalali.date_format');
+            $format ??= Infolist::$defaultDateDisplayFormat;
             $timezone ??= $this->getTimezone();
 
             $this->formatStateUsing(static function ($state) use ($format, $timezone): ?string {
@@ -88,7 +89,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         });
 
         TextEntry::macro('jalaliDateTime', function (?string $format = null, ?string $timezone = null) {
-            $format ??= config('filament-jalali.datetime_format');
+            $format ??= Infolist::$defaultDateTimeDisplayFormat;
 
             $this->jalaliDate($format, $timezone);
 
