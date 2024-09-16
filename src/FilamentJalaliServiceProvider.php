@@ -11,6 +11,8 @@ use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
+use Morilog\Jalali\CalendarUtils;
 use Morilog\Jalali\Jalalian;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -55,9 +57,12 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
                     return null;
                 }
 
-                return Jalalian::fromCarbon(Carbon::parse($state)
-                    ->setTimezone($timezone ?? $column->getTimezone()))
-                    ->format($format);
+                return CalendarUtils::convertNumbers(
+                    Jalalian::fromCarbon(
+                        Carbon::parse($state)->setTimezone($timezone ?? $column->getTimezone())
+                    )->format($format),
+                    ! App::isLocale('fa')
+                );
             });
 
             return $this;
