@@ -2,6 +2,12 @@
 
 All notable changes to `filament-jalali` will be documented in this file.
 
+## v4.1.0 - 2024-09-16
+
+Removed config file
+
+**Full Changelog**: https://github.com/mokhosh/filament-jalali/compare/v4.0.0...v4.1.0
+
 ## Remove ignore argument - 2024-09-08
 
 People who need to ignore jalali conversion can rely on `when` and `unless` methods.
@@ -11,6 +17,7 @@ TextColumn::make('created_at')
     ->when($condition, fn (TextColumn $column) => $column->jalaliDate()),
 TextColumn::make('updated_at')
     ->unless($condition, fn (TextColumn $column) => $column->jalaliDateTime()),
+
 
 ```
 ## v3.5.0 - 2024-08-18
