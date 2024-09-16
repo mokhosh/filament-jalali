@@ -85,9 +85,12 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
                     return null;
                 }
 
-                return Jalalian::fromCarbon(Carbon::parse($state)
-                    ->setTimezone($timezone))
-                    ->format($format);
+                return CalendarUtils::convertNumbers(
+                    Jalalian::fromCarbon(
+                        Carbon::parse($state)->setTimezone($timezone)
+                    )->format($format),
+                    ! App::isLocale('fa')
+                );
             });
 
             return $this;
