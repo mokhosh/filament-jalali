@@ -419,7 +419,6 @@ export default function filamentJalaliFormComponent({
         },
 
         setMonths: function () {
-            console.log(dayjs.fa)
             this.months = dayjs.locale() === 'en' ?
                 dayjs.en.jmonths :
                 'فروردین_اردیبهشت_خرداد_تیر_مرداد_شهریور_مهر_آبان_آذر_دی_بهمن_اسفند'.split('_')
