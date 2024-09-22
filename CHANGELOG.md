@@ -2,6 +2,12 @@
 
 All notable changes to `filament-jalali` will be documented in this file.
 
+## v4.2.0 - 2024-09-22
+
+Add farsi numbers
+
+**Full Changelog**: https://github.com/mokhosh/filament-jalali/compare/v4.1.0...v4.2.0
+
 ## v4.1.0 - 2024-09-16
 
 Removed config file
@@ -17,6 +23,7 @@ TextColumn::make('created_at')
     ->when($condition, fn (TextColumn $column) => $column->jalaliDate()),
 TextColumn::make('updated_at')
     ->unless($condition, fn (TextColumn $column) => $column->jalaliDateTime()),
+
 
 
 ```
