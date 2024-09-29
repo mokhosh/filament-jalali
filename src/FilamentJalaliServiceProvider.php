@@ -3,6 +3,7 @@
 namespace Mokhosh\FilamentJalali;
 
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Infolists\Components\Component;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Support\Assets\AlpineComponent;
@@ -78,16 +79,15 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
 
         TextEntry::macro('jalaliDate', function (?string $format = null, ?string $timezone = null) {
             $format ??= Infolist::$defaultDateDisplayFormat;
-            $timezone ??= $this->getTimezone();
 
-            $this->formatStateUsing(static function ($state) use ($format, $timezone): ?string {
+            $this->formatStateUsing(static function (Component $component, $state) use ($format, $timezone): ?string {
                 if (blank($state)) {
                     return null;
                 }
 
                 return CalendarUtils::convertNumbers(
                     Jalalian::fromCarbon(
-                        Carbon::parse($state)->setTimezone($timezone)
+                        Carbon::parse($state)->setTimezone($timezone ?? $component->getTimezone())
                     )->format($format),
                     ! App::isLocale('fa')
                 );
