@@ -32,4 +32,3 @@ it('uses farsi numbers if app locale is fa', function () {
         ->formatState(Carbon::parse('1989-10-07'))
         ->toBe('مهر ۱۵, ۱۳۶۸');
 });
-
