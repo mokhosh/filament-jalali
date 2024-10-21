@@ -13,12 +13,15 @@ it('formats state to jalali date', function () {
 });
 
 it('formats state based on default date display format', function () {
+    $reset = Table::$defaultDateDisplayFormat;
     Table::$defaultDateDisplayFormat = 'Y-m-d';
 
     expect(TextColumn::make(''))
         ->jalaliDate()
         ->formatState(Carbon::parse('1989-10-07'))
         ->toBe('1368-07-15');
+
+    Table::$defaultDateDisplayFormat = $reset;
 });
 
 it('uses farsi numbers if app locale is fa', function () {
