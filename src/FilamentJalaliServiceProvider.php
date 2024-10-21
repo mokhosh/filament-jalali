@@ -20,35 +20,18 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class FilamentJalaliServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'filament-jalali';
-
-    public static string $viewNamespace = 'filament-jalali';
-
     public function configurePackage(Package $package): void
     {
         $package
-            ->name(static::$name)
-            ->hasViews(static::$viewNamespace);
-    }
-
-    protected function getAssetPackageName(): ?string
-    {
-        return 'mokhosh/filament-jalali';
-    }
-
-    protected function getAssets(): array
-    {
-        return [
-            AlpineComponent::make('filament-jalali', __DIR__.'/../resources/js/dist/components/filament-jalali.js'),
-        ];
+            ->name('filament-jalali')
+            ->hasViews('filament-jalali');
     }
 
     public function packageBooted(): void
     {
-        FilamentAsset::register(
-            $this->getAssets(),
-            $this->getAssetPackageName()
-        );
+        FilamentAsset::register([
+            AlpineComponent::make('filament-jalali', __DIR__.'/../resources/js/dist/components/filament-jalali.js'),
+        ], 'mokhosh/filament-jalali');
 
         TextColumn::macro('jalaliDate', function (?string $format = null, ?string $timezone = null) {
             $format ??= Table::$defaultDateDisplayFormat;
