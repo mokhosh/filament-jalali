@@ -3,6 +3,7 @@
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
 
 it('formats state to jalali date', function () {
     expect(TextColumn::make(''))
@@ -18,5 +19,14 @@ it('formats state based on default date display format', function () {
         ->jalaliDate()
         ->formatState(Carbon::parse('1989-10-07'))
         ->toBe('1368-07-15');
+});
+
+it('uses farsi numbers if app locale is fa', function () {
+    App::setLocale('fa');
+
+    expect(TextColumn::make(''))
+        ->jalaliDate()
+        ->formatState(Carbon::parse('1989-10-07'))
+        ->toBe('مهر ۱۵, ۱۳۶۸');
 });
 
