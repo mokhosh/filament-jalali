@@ -34,7 +34,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             AlpineComponent::make('filament-jalali', __DIR__.'/../resources/js/dist/components/filament-jalali.js'),
         ], 'mokhosh/filament-jalali');
 
-        TextColumn::macro('jalaliDate', function (string | Closure | null $format = null, ?string $timezone = null) {
+        TextColumn::macro('jalaliDate', function (string|Closure|null $format = null, ?string $timezone = null) {
             $format ??= Table::$defaultDateDisplayFormat;
 
             $this->formatStateUsing(static function (Column $column, $state) use ($format, $timezone): ?string {
@@ -53,7 +53,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             return $this;
         });
 
-        TextColumn::macro('jalaliDateTime', function (string | Closure | null $format = null, ?string $timezone = null) {
+        TextColumn::macro('jalaliDateTime', function (string|Closure|null $format = null, ?string $timezone = null) {
             $format ??= Table::$defaultDateTimeDisplayFormat;
 
             $this->jalaliDate($format, $timezone);
@@ -61,7 +61,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             return $this;
         });
 
-        TextEntry::macro('jalaliDate', function (string | Closure | null $format = null, ?string $timezone = null) {
+        TextEntry::macro('jalaliDate', function (string|Closure|null $format = null, ?string $timezone = null) {
             $format ??= Infolist::$defaultDateDisplayFormat;
 
             $this->formatStateUsing(static function (Component $component, $state) use ($format, $timezone): ?string {
@@ -80,7 +80,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             return $this;
         });
 
-        TextEntry::macro('jalaliDateTime', function (string | Closure | null $format = null, ?string $timezone = null) {
+        TextEntry::macro('jalaliDateTime', function (string|Closure|null $format = null, ?string $timezone = null) {
             $format ??= Infolist::$defaultDateTimeDisplayFormat;
 
             $this->jalaliDate($format, $timezone);

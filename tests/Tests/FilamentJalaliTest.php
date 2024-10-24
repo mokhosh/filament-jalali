@@ -49,4 +49,3 @@ it('evaluates closures for format', function () {
         ->formatState(now())
         ->toBe(now()->format('H:i:s'));
 });
-
