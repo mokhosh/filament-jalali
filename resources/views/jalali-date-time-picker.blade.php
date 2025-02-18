@@ -40,13 +40,12 @@
         :attributes="\Filament\Support\prepare_inherited_attributes($getExtraAttributeBag())"
     >
             <div
-                x-ignore
                 @if (FilamentView::hasSpaMode())
-                    {{-- format-ignore-start --}}ax-load="visible || event (ax-modal-opened)"{{-- format-ignore-end --}}
+                    {{-- format-ignore-start --}}x-load="visible || event (ax-modal-opened)"{{-- format-ignore-end --}}
                 @else
-                    ax-load
+                    x-load
                 @endif
-                ax-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('filament-jalali', 'mokhosh/filament-jalali') }}"
+                x-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('filament-jalali', 'mokhosh/filament-jalali') }}"
                 x-data="filamentJalaliFormComponent({
                             displayFormat:
                                 '{{ convert_date_format($getDisplayFormat())->to('day.js') }}',
@@ -92,7 +91,7 @@
                     aria-label="{{ $getPlaceholder() }}"
                     type="button"
                     tabindex="-1"
-                    @disabled($isDisabled)
+                    @disabled($isDisabled || $isReadOnly())
                     {{
                         $getExtraTriggerAttributeBag()->class([
                             'w-full',
