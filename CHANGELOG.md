@@ -2,6 +2,10 @@
 
 All notable changes to `filament-jalali` will be documented in this file.
 
+## v4.5.0 - 2025-02-18
+
+**Full Changelog**: https://github.com/mokhosh/filament-jalali/compare/v4.4.0...v4.5.0
+
 ## v4.4.0 - 2024-10-21
 
 Add tests
@@ -33,6 +37,7 @@ TextColumn::make('created_at')
     ->when($condition, fn (TextColumn $column) => $column->jalaliDate()),
 TextColumn::make('updated_at')
     ->unless($condition, fn (TextColumn $column) => $column->jalaliDateTime()),
+
 
 
 
