@@ -2,6 +2,20 @@
 
 All notable changes to `filament-jalali` will be documented in this file.
 
+## v4.7.0 - 2025-03-29
+
+### What's Changed
+
+* Move to calidayjs to fix dated issues with alibaba's jalaliday
+* Add Laravel 12 to test workflow by @MeghdadFadaee in https://github.com/mokhosh/filament-jalali/pull/23
+* This PR fixing the GitHub Actions workflow for running tests. by @MeghdadFadaee in https://github.com/mokhosh/filament-jalali/pull/24
+
+### New Contributors
+
+* @MeghdadFadaee made their first contribution in https://github.com/mokhosh/filament-jalali/pull/23
+
+**Full Changelog**: https://github.com/mokhosh/filament-jalali/compare/v4.6.0...v4.7.0
+
 ## v4.6.0 - 2025-03-07
 
 ### What's Changed
@@ -49,6 +63,7 @@ TextColumn::make('created_at')
     ->when($condition, fn (TextColumn $column) => $column->jalaliDate()),
 TextColumn::make('updated_at')
     ->unless($condition, fn (TextColumn $column) => $column->jalaliDateTime()),
+
 
 
 
