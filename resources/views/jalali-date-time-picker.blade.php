@@ -17,6 +17,9 @@
     $suffixIcon = $getSuffixIcon();
     $suffixLabel = $getSuffixLabel();
     $statePath = $getStatePath();
+    $months = trans('filament-jalali::months');
+    $dayLabels = trans('filament-jalali::days.long');
+    $dayShortLabels = trans('filament-jalali::days.short');
 @endphp
 
 <x-dynamic-component
@@ -54,6 +57,9 @@
                             locale: @js($getLocale()),
                             shouldCloseOnDateSelection: @js($shouldCloseOnDateSelection()),
                             state: $wire.{{ $applyStateBindingModifiers("\$entangle('{$statePath}')") }},
+                            months: @js($months),
+                            dayLabel: @js($dayLabels),
+                            dayShortLabel: @js($dayShortLabels)
                         })"
                 x-on:keydown.esc="isOpen() && $event.stopPropagation()"
                 {{
@@ -104,6 +110,7 @@
                         placeholder="{{ $getPlaceholder() }}"
                         wire:key="{{ $this->getId() }}.{{ $statePath }}.{{ $field::class }}.display-text"
                         x-model="displayText"
+                        dir="ltr"
                         @if ($id = $getId()) id="{{ $id }}" @endif
                         @class([
                             'fi-fo-date-time-picker-display-text-input w-full border-none bg-transparent px-3 py-1.5 text-base text-gray-950 outline-none transition duration-75 placeholder:text-gray-400 focus:ring-0 disabled:text-gray-500 disabled:[-webkit-text-fill-color:theme(colors.gray.500)] dark:text-white dark:placeholder:text-gray-500 dark:disabled:text-gray-400 dark:disabled:[-webkit-text-fill-color:theme(colors.gray.400)] sm:text-sm sm:leading-6',

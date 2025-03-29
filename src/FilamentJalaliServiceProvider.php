@@ -25,7 +25,8 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('filament-jalali')
-            ->hasViews('filament-jalali');
+            ->hasViews('filament-jalali')
+            ->hasTranslations();
     }
 
     public function packageBooted(): void
