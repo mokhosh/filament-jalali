@@ -53,7 +53,7 @@ export default function filamentJalaliFormComponent({
 
         dayLabels: [],
 
-        months: [],
+        months,
 
         dayLabel,
 
