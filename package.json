@@ -9,6 +9,6 @@
     "dependencies": {
         "dayjs": "^1.11.12",
         "esbuild": "^0.23.1",
-        "jalaliday": "^2.3.0"
+        "@calidy/dayjs-calendarsystems": "^1.11.3"
     }
 }
