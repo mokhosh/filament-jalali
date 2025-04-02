@@ -466,7 +466,8 @@ export default function filamentJalaliFormComponent({
         },
 
         setFocusedDay: function (day) {
-            this.focusedDate = dayjs().toCalendarSystem("persian").year(this.focusedDate.year()).month(this.focusedDate.month()).date(day);
+            const diff = day - this.focusedDate.date();
+            this.focusedDate = this.focusedDate.add(diff, 'day')
         },
 
         setState: function (date) {
