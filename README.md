@@ -77,15 +77,20 @@ Forms\Components\DatePicker::make('birthday')
 ```
 
 ## Configuring the Format Globally
-You can set the default date formats for tables and infolists anywhere you want, likely in a service provider:
+You can set the default date formats for tables, infolists and date/time pickers anywhere you want, likely in a service provider:
 
 ```php
 public function boot(): void
 {
     Table::$defaultDateDisplayFormat = 'Y/m/d';
     Table::$defaultDateTimeDisplayFormat = 'Y/m/d H:i:s';
+
     Infolist::$defaultDateDisplayFormat = 'Y/m/d';
     Infolist::$defaultDateTimeDisplayFormat = 'Y/m/d H:i:s';
+
+    DateTimePicker::$defaultDateDisplayFormat = 'Y/m/d';
+    DateTimePicker::$defaultDateTimeDisplayFormat = 'Y/m/d H:i';
+    DateTimePicker::$defaultDateTimeWithSecondsDisplayFormat = 'Y/m/d H:i:s';
 }
 ```
 
