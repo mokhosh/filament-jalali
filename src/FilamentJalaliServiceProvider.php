@@ -89,10 +89,11 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             return $this;
         });
 
-        DateTimePicker::macro('jalali', function () {
+        DateTimePicker::macro('jalali', function (bool $weekdaysShort = true) {
             $this
                 ->native(false)
                 ->firstDayOfWeek(6)
+                ->extraAttributes(['data-weekdays-short' => ($weekdaysShort ? 'short' : 'long')], true)
                 ->view('filament-jalali::jalali-date-time-picker');
 
             return $this;
