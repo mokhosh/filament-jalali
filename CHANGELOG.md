@@ -2,6 +2,13 @@
 
 All notable changes to `filament-jalali` will be documented in this file.
 
+## v4.9.0 - 2025-04-03
+
+- short weekday by default
+- update readme
+
+**Full Changelog**: https://github.com/mokhosh/filament-jalali/compare/v4.8.0...v4.9.0
+
 ## v4.8.0 - 2025-04-02
 
 **Full Changelog**: https://github.com/mokhosh/filament-jalali/compare/v4.7.2...v4.8.0
@@ -75,6 +82,7 @@ TextColumn::make('created_at')
     ->when($condition, fn (TextColumn $column) => $column->jalaliDate()),
 TextColumn::make('updated_at')
     ->unless($condition, fn (TextColumn $column) => $column->jalaliDateTime()),
+
 
 
 
