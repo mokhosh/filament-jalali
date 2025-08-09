@@ -102,6 +102,73 @@ Some common formats you might want to use:
 
 `l j F` <span dir="rtl">شنبه ۱۵ مهر</span>
 
+## Filament 4 Custom Theme Integration
+Filament 4 uses a new theme system. To include filament-jalali’s styles in your Filament admin panel, do the following:
+
+### 1. Create a custom Filament theme
+Run the artisan command:
+```bash
+php artisan make:filament-theme
+```
+Follow the instructions to create your custom theme (e.g., ```FilamentTheme```).
+
+---
+
+### 2. Import filament-jalali styles in your theme’s CSS file
+Add this line to your generated theme CSS file (usually something like ```resources/css/filament/admin/theme.css```):
+```css
+@source '../../../../vendor/mokhosh/filament-jalali/resources/**/*';
+```
+This imports all CSS/SCSS from the filament-jalali package.
+
+---
+
+### 3. Add the theme CSS file to your Vite input in vite.config.js
+Edit your ```vite.config.js```:
+```js
+export default defineConfig({
+    // ...
+    build: {
+        rollupOptions: {
+            input: [
+                // other inputs ...
+                'resources/css/filament/admin/theme.css',
+            ],
+        },
+    },
+    // ...
+});
+```
+
+---
+
+### 4. Register the compiled theme CSS file in your Filament panel provider
+In your panel service provider (e.g., ```App\Providers\FilamentServiceProvider```), add:
+```php
+use Filament\Panel;
+
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        // other panel config ...
+        ->viteTheme('resources/css/filament/admin/theme.css');
+}
+```
+
+---
+
+### 5. Compile your assets with Vite
+
+Run:
+```bash
+npm run build
+```
+
+or for development:
+```bash
+npm run dev
+```
+
 ## Credits
 
 - [Mo Khosh](https://github.com/mokhosh)
