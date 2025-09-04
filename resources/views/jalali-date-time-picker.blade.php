@@ -236,7 +236,7 @@
                                             x-bind:class="{
                                             'text-gray-950 dark:text-white': ! dayIsToday(day) && ! dayIsSelected(day),
                                             'cursor-pointer': ! dayIsDisabled(day),
-                                            'text-primary-600 dark:text-primary-400':
+                                            'text-primary-600 dark:text-primary-400 fi-fo-date-time-picker-calendar-day-today':
                                             dayIsToday(day) &&
                                              ! dayIsSelected(day) &&
                                               focusedDate.date() !== day &&
@@ -245,7 +245,7 @@
                                              focusedDate.date() === day &&
                                               ! dayIsSelected(day) &&
                                                ! dayIsDisabled(day),
-                                            'text-primary-600 bg-gray-50 dark:bg-white/5 dark:text-primary-400':
+                                            'text-primary-600 bg-gray-50 dark:bg-white/5 dark:text-primary-400 fi-selected':
                                              dayIsSelected(day),
                                             'pointer-events-none': dayIsDisabled(day),
                                             'opacity-50': dayIsDisabled(day),
