@@ -2,11 +2,11 @@
 
 namespace Mokhosh\FilamentJalali;
 
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Component;
 use Closure;
 use Filament\Forms\Components\DateTimePicker;
-use Filament\Infolists\Components\Component;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Infolist;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Tables\Columns\Column;
@@ -36,7 +36,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         ], 'mokhosh/filament-jalali');
 
         TextColumn::macro('jalaliDate', function (string|Closure|null $format = null, ?string $timezone = null) {
-            $format ??= Table::$defaultDateDisplayFormat;
+            $format ??= fn (TextColumn $column): string => $column->getTable()->getDefaultDateDisplayFormat();
 
             $this->formatStateUsing(static function (Column $column, $state) use ($format, $timezone): ?string {
                 if (blank($state)) {
@@ -47,7 +47,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
                     Jalalian::fromCarbon(
                         Carbon::parse($state)->setTimezone($timezone ?? $column->getTimezone())
                     )->format($column->evaluate($format)),
-                    ! App::isLocale('fa')
+                    !App::isLocale('fa')
                 );
             });
 
@@ -55,7 +55,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         });
 
         TextColumn::macro('jalaliDateTime', function (string|Closure|null $format = null, ?string $timezone = null) {
-            $format ??= Table::$defaultDateTimeDisplayFormat;
+            $format ??= fn (TextColumn $column): string => $column->getTable()->getDefaultDateTimeDisplayFormat();
 
             $this->jalaliDate($format, $timezone);
 
@@ -63,7 +63,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         });
 
         TextEntry::macro('jalaliDate', function (string|Closure|null $format = null, ?string $timezone = null) {
-            $format ??= Infolist::$defaultDateDisplayFormat;
+            $format ??= $this->getContainer()->getDefaultDateDisplayFormat();
 
             $this->formatStateUsing(static function (Component $component, $state) use ($format, $timezone): ?string {
                 if (blank($state)) {
@@ -74,7 +74,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
                     Jalalian::fromCarbon(
                         Carbon::parse($state)->setTimezone($timezone ?? $component->getTimezone())
                     )->format($component->evaluate($format)),
-                    ! App::isLocale('fa')
+                    !App::isLocale('fa')
                 );
             });
 
@@ -82,7 +82,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         });
 
         TextEntry::macro('jalaliDateTime', function (string|Closure|null $format = null, ?string $timezone = null) {
-            $format ??= Infolist::$defaultDateTimeDisplayFormat;
+            $format ??= $this->getContainer()->getDefaultDateDisplayFormat();
 
             $this->jalaliDate($format, $timezone);
 
