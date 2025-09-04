@@ -36,7 +36,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         ], 'mokhosh/filament-jalali');
 
         TextColumn::macro('jalaliDate', function (string|Closure|null $format = null, ?string $timezone = null) {
-            $format ??= $this->getTable()->getDefaultDateDisplayFormat();
+            $format ??= fn (TextColumn $column): string => $column->getTable()->getDefaultDateDisplayFormat();
 
             $this->formatStateUsing(static function (Column $column, $state) use ($format, $timezone): ?string {
                 if (blank($state)) {
@@ -55,7 +55,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         });
 
         TextColumn::macro('jalaliDateTime', function (string|Closure|null $format = null, ?string $timezone = null) {
-            $format ??= $this->getTable()->getDefaultDateDisplayFormat();
+            $format ??= fn (TextColumn $column): string => $column->getTable()->getDefaultDateTimeDisplayFormat();
 
             $this->jalaliDate($format, $timezone);
 
