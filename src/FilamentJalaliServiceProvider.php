@@ -9,7 +9,6 @@ use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Morilog\Jalali\CalendarUtils;
@@ -76,7 +75,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
                     Jalalian::fromCarbon(
                         Carbon::parse($state)->setTimezone($component->evaluate($timezone) ?? $component->getTimezone())
                     )->format($format),
-                    !App::isLocale('fa')
+                    ! App::isLocale('fa')
                 );
             });
 
