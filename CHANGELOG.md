@@ -2,6 +2,15 @@
 
 All notable changes to `filament-jalali` will be documented in this file.
 
+## v6.0.0 - 2026-08-21
+
+### What's Changed
+
+* Refactor Jalali Date Tests to Use Real Filament Table Configuration by @MeghdadFadaee in https://github.com/mokhosh/filament-jalali/pull/36
+* Add Laravel 13 and Filament 5 support by @MeghdadFadaee in https://github.com/mokhosh/filament-jalali/pull/40
+
+**Full Changelog**: https://github.com/mokhosh/filament-jalali/compare/v5.1.0...v6.0.0
+
 ## v5.1.0 - 2025-10-10
 
 ### What's Changed
@@ -110,6 +119,7 @@ TextColumn::make('created_at')
     ->when($condition, fn (TextColumn $column) => $column->jalaliDate()),
 TextColumn::make('updated_at')
     ->unless($condition, fn (TextColumn $column) => $column->jalaliDateTime()),
+
 
 
 
