@@ -1,31 +1,34 @@
+import calendarSystems from '@calidy/dayjs-calendarsystems'
+import PersianCalendarSystem from '@calidy/dayjs-calendarsystems/calendarSystems/PersianCalendarSystem'
 import dayjs from 'dayjs/esm'
+import advancedFormat from 'dayjs/plugin/advancedFormat'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import localeData from 'dayjs/plugin/localeData'
 import timezone from 'dayjs/plugin/timezone'
 import utc from 'dayjs/plugin/utc'
-import calendarSystems from "@calidy/dayjs-calendarsystems";
-import PersianCalendarSystem from "@calidy/dayjs-calendarsystems/calendarSystems/PersianCalendarSystem";
 
+dayjs.extend(advancedFormat)
 dayjs.extend(customParseFormat)
 dayjs.extend(localeData)
 dayjs.extend(timezone)
 dayjs.extend(utc)
 dayjs.extend(calendarSystems)
-dayjs.registerCalendarSystem("persian", new PersianCalendarSystem());
+dayjs.registerCalendarSystem('persian', new PersianCalendarSystem())
 
 window.dayjs = dayjs
 
 export default function filamentJalaliFormComponent({
-                                                        displayFormat,
-                                                        firstDayOfWeek,
-                                                        isAutofocused,
-                                                        locale,
-                                                        shouldCloseOnDateSelection,
-                                                        state,
-                                                        months,
-                                                        dayLabel,
-                                                        dayShortLabel
-                                                    }) {
+    defaultFocusedDate,
+    displayFormat,
+    firstDayOfWeek,
+    isAutofocused,
+    locale,
+    shouldCloseOnDateSelection,
+    state,
+    months,
+    dayLabel,
+    dayShortLabel,
+}) {
     const timezone = dayjs.tz.guess()
 
     return {
@@ -41,6 +44,8 @@ export default function filamentJalaliFormComponent({
 
         focusedYear: null,
 
+        hasValidationMessage: false,
+
         hour: null,
 
         isClearingState: false,
@@ -51,6 +56,8 @@ export default function filamentJalaliFormComponent({
 
         state,
 
+        defaultFocusedDate,
+
         dayLabels: [],
 
         months,
@@ -59,13 +66,28 @@ export default function filamentJalaliFormComponent({
 
         dayShortLabel,
 
-        init: function () {
-            dayjs.locale(locales[locale] ?? locales['en']);
-            this.focusedDate = dayjs().tz(timezone).toCalendarSystem("persian")
+        init() {
+            dayjs.locale(locales[locale] ?? locales['en'])
+
+            this.$nextTick(() => {
+                this.focusedDate ??= (
+                    this.getDefaultFocusedDate() ?? dayjs()
+                )
+                    .tz(timezone)
+                    .toCalendarSystem('persian')
+                this.focusedMonth ??= this.focusedDate.month()
+                this.focusedYear ??= this.focusedDate.year()
+            })
 
             let date =
                 this.getSelectedDate() ??
-                dayjs().tz(timezone).toCalendarSystem("persian").hour(0).minute(0).second(0)
+                this.getDefaultFocusedDate() ??
+                dayjs()
+                    .tz(timezone)
+                    .toCalendarSystem('persian')
+                    .hour(0)
+                    .minute(0)
+                    .second(0)
 
             if (this.getMaxDate() !== null && date.isAfter(this.getMaxDate())) {
                 date = null
@@ -112,7 +134,10 @@ export default function filamentJalaliFormComponent({
                 let year = +this.focusedYear
 
                 if (!Number.isInteger(year)) {
-                    year = dayjs().tz(timezone).toCalendarSystem("persian").year()
+                    year = dayjs()
+                        .tz(timezone)
+                        .toCalendarSystem('persian')
+                        .year()
 
                     this.focusedYear = year
                 }
@@ -250,7 +275,14 @@ export default function filamentJalaliFormComponent({
             })
         },
 
-        clearState: function () {
+        checkTimeInputValidity(event) {
+            const el = event.target
+            if (this.isOpen() && !el.validity.valid) {
+                el.reportValidity()
+            }
+        },
+
+        clearState() {
             this.isClearingState = true
 
             this.setState(null)
@@ -262,7 +294,7 @@ export default function filamentJalaliFormComponent({
             this.$nextTick(() => (this.isClearingState = false))
         },
 
-        dateIsDisabled: function (date) {
+        dateIsDisabled(date) {
             if (
                 this.$refs?.disabledDates &&
                 JSON.parse(this.$refs.disabledDates.value ?? []).some(
@@ -273,37 +305,44 @@ export default function filamentJalaliFormComponent({
                             return false
                         }
 
-                        return disabledDate.isSame(date.toCalendarSystem("gregory"), 'day')
+                        return disabledDate.isSame(
+                            date.toCalendarSystem('gregory'),
+                            'day',
+                        )
                     },
                 )
             ) {
                 return true
             }
 
-            if (this.getMaxDate() && date.isAfter(this.getMaxDate())) {
+            if (this.getMaxDate() && date.isAfter(this.getMaxDate(), 'day')) {
                 return true
             }
-            if (this.getMinDate() && date.isBefore(this.getMinDate())) {
+            if (this.getMinDate() && date.isBefore(this.getMinDate(), 'day')) {
                 return true
             }
 
             return false
         },
 
-        dayIsDisabled: function (day) {
-            this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
+        dayIsDisabled(day) {
+            this.focusedDate ??= dayjs()
+                .tz(timezone)
+                .toCalendarSystem('persian')
 
             return this.dateIsDisabled(this.focusedDate.date(day))
         },
 
-        dayIsSelected: function (day) {
+        dayIsSelected(day) {
             let selectedDate = this.getSelectedDate()
 
             if (selectedDate === null) {
                 return false
             }
 
-            this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
+            this.focusedDate ??= dayjs()
+                .tz(timezone)
+                .toCalendarSystem('persian')
 
             return (
                 selectedDate.date() === day &&
@@ -312,8 +351,8 @@ export default function filamentJalaliFormComponent({
             )
         },
 
-        dayIsToday: function (day) {
-            let date = dayjs().tz(timezone).toCalendarSystem("persian")
+        dayIsToday(day) {
+            let date = dayjs().tz(timezone).toCalendarSystem('persian')
             this.focusedDate ??= date
 
             return (
@@ -323,45 +362,52 @@ export default function filamentJalaliFormComponent({
             )
         },
 
-        focusPreviousDay: function () {
-            this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
+        focusPreviousDay() {
+            this.focusedDate ??= dayjs()
+                .tz(timezone)
+                .toCalendarSystem('persian')
 
             this.focusedDate = this.focusedDate.subtract(1, 'day')
         },
 
-        focusPreviousWeek: function () {
-            this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
+        focusPreviousWeek() {
+            this.focusedDate ??= dayjs()
+                .tz(timezone)
+                .toCalendarSystem('persian')
 
             this.focusedDate = this.focusedDate.subtract(1, 'week')
         },
 
-        focusNextDay: function () {
-            this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
+        focusNextDay() {
+            this.focusedDate ??= dayjs()
+                .tz(timezone)
+                .toCalendarSystem('persian')
 
             this.focusedDate = this.focusedDate.add(1, 'day')
         },
 
-        focusNextWeek: function () {
-            this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
+        focusNextWeek() {
+            this.focusedDate ??= dayjs()
+                .tz(timezone)
+                .toCalendarSystem('persian')
 
             this.focusedDate = this.focusedDate.add(1, 'week')
         },
 
-        getDayLabels: function () {
-            let flag = this.$el.dataset.weekdaysShort;
-            let labels = [];
+        getDayLabels() {
+            let flag = this.$el.dataset.weekdaysShort
+            let labels = []
+
             if (flag === 'short') {
-                if (typeof this.dayShortLabel !== 'object') {
-                    labels = dayjs.weekdaysShort()
-                } else {
-                    labels = Object.values(this.dayShortLabel);
-                }
+                labels =
+                    typeof this.dayShortLabel !== 'object'
+                        ? dayjs.weekdaysShort()
+                        : Object.values(this.dayShortLabel)
             } else {
-                if (typeof this.dayLabel !== 'object') {
-                    labels = dayjs.weekdays()
-                } else {
-                    labels = Object.values(this.dayLabel);
-                }
+                labels =
+                    typeof this.dayLabel !== 'object'
+                        ? dayjs.weekdays()
+                        : Object.values(this.dayLabel)
             }
 
             if (firstDayOfWeek === 0) {
@@ -374,19 +420,19 @@ export default function filamentJalaliFormComponent({
             ]
         },
 
-        getMaxDate: function () {
+        getMaxDate() {
             let date = dayjs(this.$refs.maxDate?.value)
 
-            return date.isValid() ? date.toCalendarSystem("persian") : null
+            return date.isValid() ? date.toCalendarSystem('persian') : null
         },
 
-        getMinDate: function () {
+        getMinDate() {
             let date = dayjs(this.$refs.minDate?.value)
 
-            return date.isValid() ? date.toCalendarSystem("persian") : null
+            return date.isValid() ? date.toCalendarSystem('persian') : null
         },
 
-        getSelectedDate: function () {
+        getSelectedDate() {
             if (this.state === undefined) {
                 return null
             }
@@ -395,7 +441,7 @@ export default function filamentJalaliFormComponent({
                 return null
             }
 
-            let date = dayjs(this.state).toCalendarSystem("persian")
+            let date = dayjs(this.state).toCalendarSystem('persian')
 
             if (!date.isValid()) {
                 return null
@@ -404,12 +450,29 @@ export default function filamentJalaliFormComponent({
             return date
         },
 
-        togglePanelVisibility: function () {
+        getDefaultFocusedDate() {
+            if (this.defaultFocusedDate === null) {
+                return null
+            }
+
+            let defaultFocusedDate = dayjs(
+                this.defaultFocusedDate,
+            ).toCalendarSystem('persian')
+
+            if (!defaultFocusedDate.isValid()) {
+                return null
+            }
+
+            return defaultFocusedDate
+        },
+
+        togglePanelVisibility() {
             if (!this.isOpen()) {
                 this.focusedDate =
                     this.getSelectedDate() ??
+                    this.focusedDate ??
                     this.getMinDate() ??
-                    dayjs().tz(timezone).toCalendarSystem("persian")
+                    dayjs().tz(timezone).toCalendarSystem('persian')
 
                 this.setupDaysGrid()
             }
@@ -417,12 +480,14 @@ export default function filamentJalaliFormComponent({
             this.$refs.panel.toggle(this.$refs.button)
         },
 
-        selectDate: function (day = null) {
+        selectDate(day = null) {
             if (day) {
                 this.setFocusedDay(day)
             }
 
-            this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
+            this.focusedDate ??= dayjs()
+                .tz(timezone)
+                .toCalendarSystem('persian')
 
             this.setState(this.focusedDate)
 
@@ -431,24 +496,30 @@ export default function filamentJalaliFormComponent({
             }
         },
 
-        setDisplayText: function () {
+        setDisplayText() {
             this.displayText = this.getSelectedDate()
                 ? this.getSelectedDate().format(displayFormat)
                 : ''
         },
 
-        setMonths: function () {
-            if (typeof this.months !== 'object' || !Array.isArray(this.months) || this.months === null) {
+        setMonths() {
+            if (
+                typeof this.months !== 'object' ||
+                !Array.isArray(this.months) ||
+                this.months === null
+            ) {
                 this.months = dayjs.months()
             }
         },
 
-        setDayLabels: function () {
+        setDayLabels() {
             this.dayLabels = this.getDayLabels()
         },
 
-        setupDaysGrid: function () {
-            this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
+        setupDaysGrid() {
+            this.focusedDate ??= dayjs()
+                .tz(timezone)
+                .toCalendarSystem('persian')
 
             this.emptyDaysInFocusedMonth = Array.from(
                 {
@@ -465,12 +536,14 @@ export default function filamentJalaliFormComponent({
             )
         },
 
-        setFocusedDay: function (day) {
-            const diff = day - this.focusedDate.date();
-            this.focusedDate = this.focusedDate.add(diff, 'day')
+        setFocusedDay(day) {
+            this.focusedDate = (
+                this.focusedDate ??
+                dayjs().tz(timezone).toCalendarSystem('persian')
+            ).date(day)
         },
 
-        setState: function (date) {
+        setState(date) {
             if (date === null) {
                 this.state = null
                 this.setDisplayText()
@@ -492,25 +565,48 @@ export default function filamentJalaliFormComponent({
             this.setDisplayText()
         },
 
-        isOpen: function () {
+        timeInputInvalid(event) {
+            const el = event.target
+
+            if (!this.isOpen()) {
+                event.preventDefault()
+                this.togglePanelVisibility()
+            }
+
+            if (!this.hasValidationMessage) {
+                this.hasValidationMessage = true
+
+                this.$nextTick(() => {
+                    el.reportValidity()
+                    this.hasValidationMessage = false
+                })
+            }
+        },
+
+        isOpen() {
             return this.$refs.panel?.style.display === 'block'
         },
     }
 }
 
 const locales = {
+    am: require('dayjs/locale/am'),
     ar: require('dayjs/locale/ar'),
     bs: require('dayjs/locale/bs'),
     ca: require('dayjs/locale/ca'),
+    ckb: require('dayjs/locale/ku'),
     cs: require('dayjs/locale/cs'),
     cy: require('dayjs/locale/cy'),
     da: require('dayjs/locale/da'),
     de: require('dayjs/locale/de'),
+    el: require('dayjs/locale/el'),
     en: require('dayjs/locale/en'),
     es: require('dayjs/locale/es'),
+    et: require('dayjs/locale/et'),
     fa: require('dayjs/locale/fa'),
     fi: require('dayjs/locale/fi'),
     fr: require('dayjs/locale/fr'),
+    he: require('dayjs/locale/he'),
     hi: require('dayjs/locale/hi'),
     hu: require('dayjs/locale/hu'),
     hy: require('dayjs/locale/hy-am'),
@@ -520,18 +616,27 @@ const locales = {
     ka: require('dayjs/locale/ka'),
     km: require('dayjs/locale/km'),
     ku: require('dayjs/locale/ku'),
+    lt: require('dayjs/locale/lt'),
+    lv: require('dayjs/locale/lv'),
     ms: require('dayjs/locale/ms'),
     my: require('dayjs/locale/my'),
+    nb: require('dayjs/locale/nb'),
     nl: require('dayjs/locale/nl'),
     pl: require('dayjs/locale/pl'),
+    pt: require('dayjs/locale/pt'),
     pt_BR: require('dayjs/locale/pt-br'),
-    pt_PT: require('dayjs/locale/pt'),
     ro: require('dayjs/locale/ro'),
     ru: require('dayjs/locale/ru'),
+    sl: require('dayjs/locale/sl'),
+    sr_Cyrl: require('dayjs/locale/sr-cyrl'),
+    sr_Latn: require('dayjs/locale/sr'),
     sv: require('dayjs/locale/sv'),
+    th: require('dayjs/locale/th'),
     tr: require('dayjs/locale/tr'),
     uk: require('dayjs/locale/uk'),
+    ur: require('dayjs/locale/ur'),
     vi: require('dayjs/locale/vi'),
     zh_CN: require('dayjs/locale/zh-cn'),
+    zh_HK: require('dayjs/locale/zh-hk'),
     zh_TW: require('dayjs/locale/zh-tw'),
 }

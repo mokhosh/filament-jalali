@@ -7,8 +7,8 @@
         "build": "node bin/build.js"
     },
     "dependencies": {
-        "dayjs": "^1.11.12",
-        "esbuild": "^0.23.1",
-        "@calidy/dayjs-calendarsystems": "^1.11.3"
+        "@calidy/dayjs-calendarsystems": "^2.1.1",
+        "dayjs": "^1.11.21",
+        "esbuild": "^0.28.1"
     }
 }

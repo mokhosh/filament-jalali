@@ -79,5 +79,5 @@ it('evaluates closures for format', function () {
         ->jalaliDateTime(fn (Carbon $state) => $state->isToday() ? 'H:i:s' : 'Y-m-d')
         ->record($newRecord)
         ->formatState($newRecord['created_at'])
-        ->toBe(now()->format('H:i:s'));
+        ->toBe($newRecord['created_at']->format('H:i:s'));
 });
